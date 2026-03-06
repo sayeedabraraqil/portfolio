@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0a0f;
+  --primary: #6366f1;
+  --secondary: #8b5cf6;
+  --accent: #06b6d4;
+  --neon: #10b981;
+  --surface: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f0f0ff;
+  --text-secondary: #94a3b8;
+}
+
+* {
+  cursor: none;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  * { cursor: auto; }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Space Grotesk', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: #f0f0ff;
+  text-shadow: 0 0 8px rgba(99, 102, 241, 0.8);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulseNeon {
+  0%, 100% { box-shadow: 0 0 5px #6366f1, 0 0 10px #6366f1; }
+  50% { box-shadow: 0 0 20px #6366f1, 0 0 40px #6366f1; }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.glitch {
+  animation: glitch 0.3s ease-in-out infinite;
+}
+
+.neon-border {
+  border: 1px solid transparent;
+  background: linear-gradient(#0a0a0f, #0a0a0f) padding-box,
+              linear-gradient(135deg, #6366f1, #06b6d4) border-box;
+}
