@@ -13,19 +13,23 @@ export function useMousePosition(): MousePosition {
   })
 
   useEffect(() => {
-    let timeoutId: ReturnType<typeof setTimeout>
-    
+    let rafId: number
+    let pendingX = 0
+    let pendingY = 0
+
     const updateMousePosition = (e: MouseEvent) => {
-      clearTimeout(timeoutId)
-      timeoutId = setTimeout(() => {
-        setMousePosition({ x: e.clientX, y: e.clientY })
-      }, 10)
+      pendingX = e.clientX
+      pendingY = e.clientY
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        setMousePosition({ x: pendingX, y: pendingY })
+      })
     }
 
     window.addEventListener('mousemove', updateMousePosition)
     return () => {
       window.removeEventListener('mousemove', updateMousePosition)
-      clearTimeout(timeoutId)
+      cancelAnimationFrame(rafId)
     }
   }, [])
 

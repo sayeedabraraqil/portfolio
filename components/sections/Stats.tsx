@@ -11,19 +11,22 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   useEffect(() => {
     if (!inView) return
     const duration = 2000
-    const steps = 60
-    const increment = value / steps
-    let current = 0
-    const timer = setInterval(() => {
-      current += increment
-      if (current >= value) {
-        setCount(value)
-        clearInterval(timer)
+    const startTime = performance.now()
+    let rafId: number
+
+    const animate = (now: number) => {
+      const elapsed = now - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      setCount(Math.floor(progress * value))
+      if (progress < 1) {
+        rafId = requestAnimationFrame(animate)
       } else {
-        setCount(Math.floor(current))
+        setCount(value)
       }
-    }, duration / steps)
-    return () => clearInterval(timer)
+    }
+
+    rafId = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(rafId)
   }, [inView, value])
 
   return (
