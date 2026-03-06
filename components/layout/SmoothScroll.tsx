@@ -1,0 +1,26 @@
+'use client'
+import { useEffect } from 'react'
+import Lenis from '@studio-freight/lenis'
+import gsap from 'gsap'
+
+export default function SmoothScroll({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    const lenis = new Lenis({
+      lerp: 0.1,
+      duration: 1.2,
+      smoothWheel: true,
+    })
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000)
+    })
+
+    gsap.ticker.lagSmoothing(0)
+
+    return () => {
+      lenis.destroy()
+    }
+  }, [])
+
+  return <>{children}</>
+}
