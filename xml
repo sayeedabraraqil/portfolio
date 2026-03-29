@@ -12,9 +12,13 @@
 
   <b:include data='blog' name='all-head-content'/>
   <title><data:blog.pageTitle/></title>
+  
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
   <b:skin><![CDATA[
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
 
     html {
       scroll-behavior: smooth;
@@ -721,10 +725,127 @@
         right: 15px;
         padding: 5px 12px;
         font-size: 0.85rem;
+    /* Chapter sections with collapsible functionality */
+    .chapters-section {
+      max-width: 720px;
+      margin: 60px auto 88px;
+      padding: 48px 32px;
+      background: #142c69;
+      border-radius: 48px;
+      box-shadow: 0 8px 48px rgba(0,255,231,0.3);
+      user-select: none;
+    }
+
+    body.light-mode .chapters-section {
+      background: #95bbff;
+    }
+
+    .chapters-section h2 {
+      color: #00FFE7;
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    body.light-mode .chapters-section h2 {
+      color: #227ea6;
+    }
+
+    .chapter-item {
+      margin-bottom: 20px;
+      border: 1px solid #2a4a8a;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0f1f54;
+    }
+
+    body.light-mode .chapter-item {
+      border-color: #7ca8d9;
+      background: #a8c8ff;
+    }
+
+    .chapter-item summary {
+      padding: 20px 24px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #EFEFEF;
+      background: #1a3a75;
+      border: none;
+      outline: none;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background-color 0.3s ease;
+      font-family: 'Hind Siliguri', 'Inter', sans-serif;
+    }
+
+    body.light-mode .chapter-item summary {
+      color: #202c4c;
+      background: #b8d4ff;
+    }
+
+    .chapter-item summary:hover {
+      background: #2550a0;
+    }
+
+    body.light-mode .chapter-item summary:hover {
+      background: #9bc4ff;
+    }
+
+    /* Font Awesome chevron icon - replaces problematic Unicode arrow */
+    .chapter-item summary::after {
+      content: '\f078'; /* Font Awesome chevron-down */
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      font-size: 12px;
+      transition: transform 0.3s ease;
+      margin-left: auto;
+    }
+
+    .chapter-item[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .chapter-content {
+      padding: 24px;
+      background: #0B1D51;
+      color: #B0B5BA;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    body.light-mode .chapter-content {
+      background: #d1e5ff;
+      color: #3a4f6f;
+    }
+
+    .chapter-content p {
+      margin: 0 0 16px 0;
+    }
+
+    .chapter-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+      .chapters-section {
+        margin: 40px 16px 60px;
+        padding: 32px 20px;
+        border-radius: 32px;
+      }
+
+      .chapter-item summary {
+        padding: 16px 20px;
+        font-size: 1.1rem;
+      }
+
+      .chapter-content {
+        padding: 20px;
       }
     }
-  
-  ]]></b:skin>
 </head>
 
 <body>
@@ -733,6 +854,7 @@
       <ul>
         <li><a class='active' href='#hero'>Home</a></li>
         <li><a href='#about'>About</a></li>
+        <li><a href='#chapters'>Chapters</a></li>
         <li><a href='#portfolio'>Portfolio</a></li>
         <li><a href='#contact'>Contact</a></li>
       </ul>
@@ -769,6 +891,43 @@
         <div class='skill-bar-fill' data-width='75%'/>
       </div>
     </div>
+  </section>
+
+  <!-- Chapters Section with collapsible functionality -->
+  <section aria-label='Chapters Section' class='chapters-section' id='chapters' tabindex='0'>
+    <h2>Blog Chapters</h2>
+    
+    <details class='chapter-item'>
+      <summary>Getting Started with Web Development</summary>
+      <div class='chapter-content'>
+        <p>এই অধ্যায়ে আমরা ওয়েব ডেভেলপমেন্টের মূল বিষয়গুলি নিয়ে আলোচনা করব। HTML, CSS এবং JavaScript এর প্রাথমিক ধারণা পাবেন।</p>
+        <p>This chapter covers the fundamentals of web development including HTML structure, CSS styling, and JavaScript functionality.</p>
+      </div>
+    </details>
+
+    <details class='chapter-item'>
+      <summary>Responsive Design Principles</summary>
+      <div class='chapter-content'>
+        <p>রেসপন্সিভ ডিজাইন কীভাবে করতে হয় এবং বিভিন্ন ডিভাইসের জন্য অপ্টিমাইজ করতে হয় তা শিখুন।</p>
+        <p>Learn how to create responsive designs that work seamlessly across different devices and screen sizes.</p>
+      </div>
+    </details>
+
+    <details class='chapter-item'>
+      <summary>Modern JavaScript Frameworks</summary>
+      <div class='chapter-content'>
+        <p>আধুনিক জাভাস্ক্রিপ্ট ফ্রেমওয়ার্ক যেমন React, Vue, এবং Angular সম্পর্কে জানুন।</p>
+        <p>Explore popular JavaScript frameworks and libraries that make development faster and more efficient.</p>
+      </div>
+    </details>
+
+    <details class='chapter-item'>
+      <summary>Backend Development Basics</summary>
+      <div class='chapter-content'>
+        <p>ব্যাকএন্ড ডেভেলপমেন্টের মূল বিষয়গুলি এবং সার্ভার সাইড প্রোগ্রামিং সম্পর্কে শিখুন।</p>
+        <p>Understanding server-side programming, databases, and API development fundamentals.</p>
+      </div>
+    </details>
   </section>
 
   <main role='main'>
